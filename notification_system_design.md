@@ -41,7 +41,7 @@ Request Body:
 no any request body
 Response Body:
 {
-    "message":"Notification is readed"
+    "message":TRUE
 }
 
 
