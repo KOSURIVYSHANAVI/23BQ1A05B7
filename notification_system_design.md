@@ -153,3 +153,15 @@ Increases the speed
 Tradeoffs:
 It requires Queues
 Debugging is complex
+
+STAGE 6:
+1.I understood the problem, we have to fetch only top 10 records also based on giving priority placement>result>event
+they can be assigned with some values based on priority like placement:10,result:7,event:3 based on the priority.
+2.N be taken as 10 as we need only top 10 records.
+3.URL mentioned here can be taken
+4.we have to get their recent scores
+5.compute the actual scores
+6.we have to fetch all notifications
+7.We have to fetch only top 10 notifications,by using min heap
+8.Before displaying we have to sort them based on the priority
+9.Finally we have to display them
