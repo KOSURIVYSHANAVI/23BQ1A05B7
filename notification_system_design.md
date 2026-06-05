@@ -114,3 +114,26 @@ Query to get students who got the placement notification last week i.e last 7 da
 select DISTINCT studentID from notifications where notificationType = 'placement' AND createdAt >= NOW() - INTERVAL 7 DAY;
 
 we use distinct to avoid getting same student more than one and to specify condition we used where type must be placement and createdAt >= NOW() - INTERVAL 7 DAY, is used to get the details from now within a span of 1 week, we not mention it we will get all students who got placement notifications.
+
+STAGE 4:
+
+Problem facing:
+when all the users are fetching their data the database is being overloaded this decreases the user experience
+
+Solution i would do:
+1.Caching:
+In caching we can use Redis, when a user searches for a data it must be first search at cache if it not there we can move to database then  store it in cache and then send to the enduser
+Saves times
+DB load can be reduced
+
+2.Pagination:
+In Pagination instead of user getting all the details at a time we will restrict the data to some intervals using page size 10,15,20.. so that no.of data can be fetched on screen,gives time to load the other data
+Reduses the load on DB
+
+3.other one we can use fetch only unread messages which also reduces the load on db instead of loading all the records
+
+Tradeoffs:
+Analyzing the suggestions i have made
+1.for caching reduces time but cost for caching increases
+2.cache must be handled carefully if not we must have to face problems in further
+3.pagination queries must be write correctly other wise it also causes error
