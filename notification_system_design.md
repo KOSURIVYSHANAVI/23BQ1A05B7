@@ -137,3 +137,19 @@ Analyzing the suggestions i have made
 1.for caching reduces time but cost for caching increases
 2.cache must be handled carefully if not we must have to face problems in further
 3.pagination queries must be write correctly other wise it also causes error
+
+Stage 5:
+I understood the Query given,they are trying to send emails to all students also in sequential,which consumes a lot of time.
+After some emails sent it is stopping,but it never continued again so that other can't get email only 200 get them,we must use asynchronus mechanism to make it in better way
+
+Basic Idea:
+Instead of using Loops in Query we can use Queues,which improves the efficiency 
+
+Benifits:
+improves scalability can handles any no of users
+improves reliability if attempt failed again try to send again best compared to given query
+Increases the speed
+
+Tradeoffs:
+It requires Queues
+Debugging is complex
