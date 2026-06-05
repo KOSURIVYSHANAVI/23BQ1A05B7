@@ -81,3 +81,36 @@ REST APIS in stage1:
 GET    /notifications?userId=1
 POST   /notifications
 PUT    /notifications/{id}
+
+STAGE3:validating the given query
+given :
+
+select * from notifications
+where studentId=1042 AND is_read=false
+ORDER_BY createdAt DESC;
+
+yes,logically the above Query is correct,the query fetches the notifications that are unread in order of latest first
+
+It is slow because no any particular indexing the queries searches all the data in the given database and stores the unread data and then it displays in sorted order high time complexity around of 0(n log n),so it is slow
+
+solution i think:
+create INDEX i on notifications(studentID, isRead, createdAt DESC);
+Filters studentID,isRead,sorts by createdAt so need of sorting,only a complextiy of 0(n) saves some time
+
+Indexing:
+Indexing gives output correct,but not a good idea it increases the cost for storing them and Insertions,deletions,updations can be slower compared to before,it is not a good idea i will explain the conseques to my team mate who proposed this idea.
+Another possible Query:
+
+select id, message, createdAt
+from notifications
+WHERE studentID = 1042
+AND isRead = false
+ORDER BY createdAt DESC;
+
+better compared to first
+
+Query to get students who got the placement notification last week i.e last 7 days:
+
+select DISTINCT studentID from notifications where notificationType = 'placement' AND createdAt >= NOW() - INTERVAL 7 DAY;
+
+we use distinct to avoid getting same student more than one and to specify condition we used where type must be placement and createdAt >= NOW() - INTERVAL 7 DAY, is used to get the details from now within a span of 1 week, we not mention it we will get all students who got placement notifications.
